@@ -30,13 +30,17 @@ export class CoursesPage extends React.Component {
   }
 
   render() {
-    const { courses } = this.props;
+    const { courses, ajaxCallsInProgress } = this.props;
 
     return (
       <div>
         <h1>Courses</h1>
         <input type="submit" value="Add Course" className="btn btn-primary" onClick={this.redirectToAddCoursePage} />
-        <CourseList courses={courses} onDeleteCourse={this.onDeleteCourse} />
+        {courses.length > 0 ? (
+          <CourseList courses={courses} onDeleteCourse={this.onDeleteCourse} />
+        ) : (
+          <div style={{ paddingTop: '20px' }}>{ajaxCallsInProgress < 1 && "No courses! Add some by clicking on 'Add Course button'"}</div>
+        )}
       </div>
     );
   }
@@ -44,12 +48,13 @@ export class CoursesPage extends React.Component {
 
 CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  ajaxCallsInProgress: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
   let courses = [...state.courses];
-  return { courses: sortArrayOfObjects(courses, 'title') };
+  return { courses: sortArrayOfObjects(courses, 'title'), ajaxCallsInProgress: state.ajaxCallsInProgress };
 };
 const mapDispatchToProps = dispatch => {
   return {
