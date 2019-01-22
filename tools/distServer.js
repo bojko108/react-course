@@ -3,7 +3,7 @@ import path from 'path';
 import open from 'open';
 import compression from 'compression';
 
-const port = 3000;
+const port = 3214;
 const app = express();
 
 app.use(compression);
