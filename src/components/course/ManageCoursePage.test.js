@@ -4,7 +4,7 @@ import { mount, shallow } from 'enzyme';
 import { ManageCoursePage } from './ManageCoursePage';
 
 describe('Manage Course Page tests', () => {
-  it('sets error message when trying to save empty title', () => {
+  it('sets error message when trying to set empty title', () => {
     const props = {
       authors: [],
       actions: {
