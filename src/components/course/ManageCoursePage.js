@@ -33,11 +33,34 @@ export class ManageCoursePage extends React.Component {
     return this.setState({ course: course });
   }
 
+  isTimeStamp(time) {
+    return RegExp(/^(00|[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9])$/).test(time);
+  }
+
   isValid() {
     let errors = {};
 
-    if (this.state.course.title.length < 5) {
-      errors.title = 'Title must be at least 5 characters.';
+    const { title, authorId, category, length } = this.state.course;
+
+    if (title.length == 0) {
+      errors.title = 'You must specify a title.';
+    } else {
+      if (title.length < 5) {
+        errors.title = 'Title must be at least 5 characters.';
+      }
+    }
+    if (authorId.length == 0) {
+      errors.authorId = 'You must specify an author.';
+    }
+    if (category.length == 0) {
+      errors.category = 'You must specify a category.';
+    }
+    if (length.length == 0) {
+      errors.length = "You must specify course's length";
+    } else {
+      if (this.isTimeStamp(length) == false) {
+        errors.length = "You must enter course's length in format hh:mm";
+      }
     }
 
     this.setState({ errors: errors });
