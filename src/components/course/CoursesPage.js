@@ -5,12 +5,14 @@ import { bindActionCreators } from 'redux';
 import * as courseActions from '../../actions/courseActions';
 import CourseList from './CourseList';
 import { sortArrayOfObjects } from '../../selectors';
+import toastr from 'toastr';
 
 export class CoursesPage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
+    this.onDeleteCourse = this.onDeleteCourse.bind(this);
   }
 
   courseRow(course, index) {
@@ -21,6 +23,12 @@ export class CoursesPage extends React.Component {
     browserHistory.push('/course');
   }
 
+  onDeleteCourse(course) {
+    this.props.actions.deleteCourse(course).then(() => {
+      toastr.warning(`Course ${course.title} was deleted!`);
+    });
+  }
+
   render() {
     const { courses } = this.props;
 
@@ -28,7 +36,7 @@ export class CoursesPage extends React.Component {
       <div>
         <h1>Courses</h1>
         <input type="submit" value="Add Course" className="btn btn-primary" onClick={this.redirectToAddCoursePage} />
-        <CourseList courses={courses} />
+        <CourseList courses={courses} onDeleteCourse={this.onDeleteCourse} />
       </div>
     );
   }
