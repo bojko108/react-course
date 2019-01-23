@@ -3,7 +3,7 @@ import { Link, IndexLink } from 'react-router';
 import LoadingDots from './LoadingDots';
 import { connect } from 'react-redux';
 
-const Header = ({ loading, count }) => {
+const Header = ({ loading, authorsCount, coursesCount }) => {
   const formatHeader = (text, count) => {
     if (count > 0) {
       return `${text} (${count})`;
@@ -19,7 +19,11 @@ const Header = ({ loading, count }) => {
       </IndexLink>
       {' | '}
       <Link to="courses" activeClassName="active">
-        {formatHeader('Courses', count)}
+        {formatHeader('Courses', coursesCount)}
+      </Link>
+      {' | '}
+      <Link to="authors" activeClassName="active">
+        {formatHeader('Authors', authorsCount)}
       </Link>
       {' | '}
       <Link to="about" activeClassName="active">
@@ -37,7 +41,8 @@ Header.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    count: state.courses.length
+    authorsCount: state.authors.length,
+    coursesCount: state.courses.length
   };
 };
 

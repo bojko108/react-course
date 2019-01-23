@@ -28,7 +28,8 @@ CourseForm.propTypes = {
   allAuthors: PropTypes.array,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  saving: PropTypes.bool
+  saving: PropTypes.bool,
+  errors: PropTypes.object.isRequired
 };
 
 export default CourseForm;
