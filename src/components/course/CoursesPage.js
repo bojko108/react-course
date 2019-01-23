@@ -39,7 +39,7 @@ export class CoursesPage extends React.Component {
         {courses.length > 0 ? (
           <CourseList courses={courses} onDeleteCourse={this.onDeleteCourse} />
         ) : (
-          <div style={{ paddingTop: '20px' }}>{ajaxCallsInProgress < 1 && "No courses! Add some by clicking on 'Add Course button'"}</div>
+          <div style={{ paddingTop: '20px' }}>{ajaxCallsInProgress < 1 && "No courses! Add some by clicking on 'Add Course' button"}</div>
         )}
       </div>
     );

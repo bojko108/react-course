@@ -39,7 +39,7 @@ export class AuthorsPage extends React.Component {
         {authors.length > 0 ? (
           <AuthorList authors={authors} onDeleteAuthor={this.onDeleteAuthor} />
         ) : (
-          <div style={{ paddingTop: '20px' }}>{ajaxCallsInProgress < 1 && "No authors! Add some by clicking on 'Add Authors button'"}</div>
+          <div style={{ paddingTop: '20px' }}>{ajaxCallsInProgress < 1 && "No authors! Add some by clicking on 'Add Author' button"}</div>
         )}
       </div>
     );
